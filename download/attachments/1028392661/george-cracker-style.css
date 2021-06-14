@@ -1,0 +1,464 @@
+
+/*-----------
+| VARIABLES |
+-----------*/
+:root {
+  --colour-disabled: #dfe5f2;
+  --colour-enabled: #627ebe;
+}
+
+.composition-banner.conf-macro.output-inline {
+  min-height: 200px;
+}
+
+/*-----------\
+|  TOP AREA  |
+\-----------*/
+.cracker-area {
+  font-family: 'IBM Plex Sans', sans-serif;
+  /* Font source is Google's libre fonts db: https://fonts.google.com/ */
+  /* margin-top: 20em; */
+  margin-top: 15em;
+  /* margin-top: 1em; */
+  display: grid;
+  grid-template-columns: 1fr 20fr 2fr;
+  grid-template-rows: 1.5em 1.5em 2em auto 1.5em auto auto;
+  grid-row-gap: 0.5em;
+  grid-template-areas: 
+    "    icons     icons     ...   "
+    "    input     input     ...   "
+    "    ...      toggle      ...   "
+    "    ...  output-simple   ...   "
+    "    ..  escape-confluence ..   "
+    "    ...  output-extra    ...   "
+    "    ...  output-debug    ...   ";
+}
+
+.icons {
+  grid-area: icons;
+  display: flex;
+  fill: var(--colour-enabled);
+}
+
+.icons svg {
+  vertical-align: middle;
+  width: 1.25em;
+  height: 1.25em;
+}
+
+/* spaces them apart */
+.icons-right > .icon-span {
+  font-size: 1.25em;
+  margin-left: 0.4em;
+}
+
+/* push other icons to the right & set cursor */
+#eyeball-icon-span {
+  margin-right: auto;
+  cursor: pointer;
+}
+
+/* colours icons when disabled */
+.icons.disabled,
+.icons.disabled > #eyeball-icon-span,
+.icons-right .icomoon:not(.active) {
+  fill: var(--colour-disabled);
+  cursor: default;
+}
+
+/* hides the tooltip popup */
+.icons.disabled .tooltip-popup,
+.icomoon:not(.active) + .tooltip-popup {
+  visibility: hidden;
+}
+
+.icomoon-entropy-value {
+  position: relative;
+  left: -55%;
+  top: -0.25em;
+  font-size: 0.5em;
+  font-weight: bold;
+  color: var(--colour-enabled)
+}
+
+.input {
+  grid-area: input;
+  height: 1.5em;
+}
+
+/*----------------------------
+|  TOGGLE SWITCH [less|more] |
+----------------------------*/
+/* https://codepen.io/morgoe/pen/VvzWQg */
+
+
+.toggle-area {
+  grid-area: toggle;
+  justify-self: end;
+  font-size: 1em;
+  align-self: center;
+  margin: 0 0.5em 0 0;
+}
+
+.toggle svg {
+  width: 1em;
+  height: 1em;
+  top: 0.0625em;
+}
+
+.toggle {
+  cursor: pointer;
+}
+
+.toggle > .checkbox {
+  display: inline-block;
+}
+
+.toggle:not(.disabled) {
+  cursor: pointer;
+}
+
+.toggle > .checkbox {
+  position: absolute;
+  visibility: hidden;
+}
+
+/* switch = thing between icons */
+.toggle > .switch {
+  display: inline-block;
+  background: var(--colour-enabled);
+  border-radius: 1em;
+  width: 2em;
+  height: 1em;
+  position: relative;
+  vertical-align: middle;
+  left: 1.2em;
+  top: -0.125em;
+}
+
+.toggle.disabled > .switch {
+  background: var(--colour-disabled);
+}
+
+/* white circle in centre */
+.toggle:not(.disabled) > .switch:after {
+  content: "";
+  display: block;
+  background: white;
+  border-radius: 50%;
+  width: 0.5em;
+  height: 0.5em;
+  position: absolute;
+  top: 0.25em;
+  left: 0.25em;
+  transition: left 0.2s;
+}
+
+/* white circle's movement */
+.toggle > .checkbox:checked + .switch:after {
+  left: 1.25em;
+}
+
+.toggle > .toggle-icon-left svg {
+  position: relative;
+  left: -2.75em;
+  fill: var(--colour-enabled);
+}
+
+.toggle > .toggle-icon-right svg {
+  position: relative;
+  left: 0.25em;
+  fill: var(--colour-disabled);
+}
+
+.toggle:not(.disabled) > .checkbox:checked ~ .toggle-icon-right svg {
+  fill: var(--colour-enabled);
+}
+
+.toggle:not(.disabled) > .checkbox:checked ~ .toggle-icon-left svg {
+  fill: var(--colour-disabled);
+}
+
+.toggle.disabled svg {
+  fill: var(--colour-disabled);
+}
+
+/*------------\
+| BOTTOM AREA |
+\----------- */
+
+.output-simple {
+  grid-area: output-simple;
+  text-align: center;
+}
+
+#output-main-hash {
+  padding: 0.5em 0 0.5em 0;
+}
+
+.output-simple > div {
+  animation-duration: 0.25s;
+}
+
+.output-simple svg {
+  width: 3em;
+  height: 3em;
+  fill: var(--colour-enabled);
+}
+
+.output-simple svg path {
+  fill: var(--colour-enabled);
+}
+
+.output-simple:not(.hhidden) {
+  visibility: inherit;
+}
+
+.output-simple.hhidden {
+  visibility: hidden;
+}
+
+.output-simple:not(.disabled) {
+  color: var(--colour-enabled);
+}
+
+.output-simple.disabled {
+  color: var(--colour-disabled);
+}
+
+.output-extra {
+  grid-area: output-extra;
+}
+
+.output-extra .output-extra:not(.removed) {
+  display: initial;
+}
+
+.output-extra .removed {
+  display: none;
+}
+
+/* ---------\
+|  FLEXBOX  |
+\----------*/
+
+.george-flexbox {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.output-extra .removed {
+  display: none;
+}
+
+.hash {
+  position: relative;
+  color: var(--colour-enabled);
+  overflow: hidden;
+  text-align: center;
+  flex: 1 1 0;
+  min-height: 18em;
+  transition: flex 0.25s ease-in-out;
+  padding-top: 2em;
+  cursor: pointer;
+}
+
+.hash.hhidden {
+  visibility: hidden;
+}
+
+.hash:hover {
+  flex: 15;
+}
+
+.hash.disabled {
+  color: var(--colour-disabled);
+}
+
+.hash i {
+  font-size: 2em;
+}
+
+.hash svg {
+  width: 2em;
+  height: 2em;
+  fill: var(--colour-enabled);
+}
+
+.hash .deets .name {
+  font-size: 1.2em;
+}
+.hash .deets .duration {
+  font-size: 1.2em;
+}
+.hash .deets .description {
+  font-size: 0.8em;
+}
+
+#output-main-hash .duration {
+  font-size: 1.5em;
+}
+
+#output-main-hash .something-interesting {
+  font-size: 1em;
+}
+
+.hash .deets {
+  position: absolute;
+  opacity: 0;
+}
+
+.hash:hover .deets {
+  transition: opacity 0.5s linear 0.25s;
+  opacity: 1;
+  animation: affect-height-using-position;
+  animation-delay: 0.125s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes affect-height-using-position {
+  from {position: absolute;}
+  to {position: relative;}
+    /* this animation's purpose is to delay an individual hash's
+    position transition. Otherwise the position changes immediately
+    and it affects the flexbox item's width and height too soon to
+    be desirable, i.e., prior to the text fading in and prior to the
+    width transitioning smoothly (it just goes *bam* to hold the content)
+    source: https://stackoverflow.com/questions/35624241/delay-css-position-change-with-pure-css  */
+}
+
+
+/*-------------------\
+| ESCAPE CONFLUENCE  |
+--------------------*/
+
+#escape-confluence-button {
+  grid-area: escape-confluence;
+  justify-self: right;
+  /* animation-duration: 2s; */
+  /* transition: opacity 10s; */
+  visibility: visible;
+  /* opacity: 0.5; */
+}
+
+#escape-confluence-button.hhidden {
+  visibility: hidden;
+  /* opacity: 0; */
+}
+
+button.minimal {
+  position: relative;
+  background: var(--colour-disabled);
+  border: 1px solid #bbb;
+  border-radius: 3px;
+  box-shadow: inset 0 0 1px 1px #f6f6f6;
+  /* color: #333; */
+  text-align: center;
+  text-shadow: 0 1px 0 #fff;
+  width: 12em; 
+  height: 1.5em;
+  }
+  button.minimal:hover {
+    background: #d9d9d9;
+    box-shadow: inset 0 0 1px 1px #eaeaea;
+    color: #222;
+    cursor: pointer; }
+  button.minimal:active {
+    background: #d0d0d0;
+    box-shadow: inset 0 0 1px 1px #e3e3e3;
+    color: #000; }
+
+
+
+/*--------------------------
+| ICON MOUSE-OVER TOOLTIPS |
+---------------------------/
+Source: http://www.menucool.com/tooltip/css-tooltip	
+---------------------------------------------------*/
+
+.tooltip-icon {
+    display:inline-block;
+    position:relative;
+    /* text-align:left; */
+}
+
+.tooltip-icon h3 {
+  margin:12px 0;
+}
+
+.tooltip-icon .tooltip-popup {
+    min-width:12em;
+    max-width:15em;
+    top:-20px;
+    left:50%;
+    transform:translate(-30%,-100%);
+    padding:10px 20px;
+    color:#ffffff;
+    background-color:var(--colour-enabled);
+    font-weight:normal;
+    font-size:13px;
+    border-radius:8px;
+    position:absolute;
+    z-index:20;
+    box-sizing:border-box;
+    /* box-shadow:0 1px 8px rgba(0,0,0,0.5); */
+    display:none;
+}
+
+.tooltip-icon:hover .tooltip-popup {
+    display:block;
+}
+
+.tooltip-icon .tooltip-popup i {
+    position:absolute;
+    top:100%;
+    left:30%;
+    margin-left:-15px;
+    width:30px;
+    height:15px;
+    overflow:hidden;
+}
+
+.tooltip-icon .tooltip-popup i::after {
+    content:'';
+    position:absolute;
+    width:1em;
+    height:1em;
+    left:50%;
+    transform:translate(-50%,-50%) rotate(45deg);
+    background-color: var(--colour-enabled);
+    /* box-shadow:0 1px 8px rgba(0,0,0,0.5); */
+}
+
+/* tooltip hash (groups eg: operating system) */
+.hash {
+  display:inline-block;
+  position:relative;
+}
+
+.tooltiptext {
+  visibility: hidden;
+  width: 100%;
+  background-color: var(--colour-enabled);
+  color: white;
+  text-align: center;
+
+  /* Position the tooltip text */
+  position: absolute;
+  bottom: 1px;
+  left: 1px;
+
+  /* Fade in tooltip */
+  opacity: 0;
+  /* transition: opacity 0s; */
+}
+
+.hash:hover .tooltiptext {
+  visibility: visible;
+  opacity: 0.25;
+}
+
+#output-debug {
+  grid-area: output-debug;
+}

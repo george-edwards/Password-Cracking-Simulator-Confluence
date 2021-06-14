@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>password cracker</title>
+</head>
+<body>
+
+<!--------------------------- HTML INCLUDE 1 -------------------------->
+
+<!-- Font Awesome for css-drawn icons -->
+<!-- <script src="https://kit.fontawesome.com/d61b843e84.js"></script> -->
+
+<!-- password cracking tool -->
+<script type="text/javascript" src="./download/attachments/1028392661/george-cracker-objects.js"></script>
+<script type="text/javascript" src="./download/attachments/1028392661/george-cracker-globals.js"></script>
+<script type="text/javascript" async src="./download/attachments/1028392661/george-cracker-async-load.js"></script>
+<script type="text/javascript" defer src="./download/attachments/1028392661/george-cracker-functions.js"></script>
+<script type="text/javascript" defer src="./download/attachments/1028392661/george-cracker-events.js"></script>
+<link rel="stylesheet" type="text/css" href="./download/attachments/1028392661/george-cracker-style.css">
+<link rel="stylesheet" type="text/css" href="./download/attachments/1028392661/animate.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400&display=swap">
+
+<!-- ---------------------- < HTML INCLUDE 2 > ---------------------------->
+
+<!-- HTML SKELETON -->
+
+<!-- TOP AREA (INPUT, ICONS, TOGGLE, & SIMPLE OUTPUT) -->
+<div class="cracker-area">
+
+    <!-- ICONS -->
+    <div class="icons" id="inject-icons"></div>
+
+    <!-- PASSWORD FIELD -->
+    <input class="input" type="text" id="inputpassword" placeholder="loading..." autofocus disabled>
+
+    <!-- TOGGLE SWITCH BUTTON -->
+    <div class="toggle-area">
+        <label class="toggle" id="output-toggle">
+            <input class="checkbox" id="toggle-checkbox" type="checkbox">
+            <div class="switch"></div>
+                <span class="toggle-icon-left"> 
+                    <svg class="icomoon icomoon-win7"><use xlink:href="/download/attachments/1028392661/symbol-defs.svg#icomoon-win7"></use></svg>
+                </span>
+                <span class="toggle-icon-right">
+                    <svg class="icomoon icomoon-win7"><use xlink:href="/download/attachments/1028392661/symbol-defs.svg#icomoon-more"></use></svg>
+                </span>
+        </label>
+    </div>
+
+    <!-- BOTTOM AREA (OUTPUT) -->
+    <div class="output-simple hhidden" id="inject-output-simple"></div>
+    <button id="escape-confluence-button" class="minimal hhidden" onclick="escapeConfluenceClicked(this)">escape confluence</button>
+    <div class="output-extra">
+        <div class="george-flexbox" id="inject-output-extra"></div>
+    </div>
+
+    <div class="div" id="output-debug"></div>
+</div>
+
+<!-- ---------------------- </ HTML INCLUDE 2 > ---------------------------->
+
+</body>
+</html>
